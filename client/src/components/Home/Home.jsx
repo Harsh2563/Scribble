@@ -113,7 +113,8 @@ function Home() {
 
       {/* Search Results Section */}
         {searchQuery.length > 0 && (
-          <div className="home-notes">
+          <div className="home-folder-notes">
+            <div className="home-notes">
             <div className="folder-title">
               <h1>Search Results: </h1>
             </div>
@@ -129,6 +130,7 @@ function Home() {
                  </div>
                 ))}
             </div>
+          </div>
           </div>
         )}
 
