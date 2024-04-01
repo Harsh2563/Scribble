@@ -38,13 +38,13 @@ const Title = () => {
 
   const renderLabelChars = () => {
     // Only render the label if inputValue is empty
-    if (inputValue === "") {
-      return labelText.split("").map((char, index) => (
-        <span key={index} className="label-char" style={{ "--index": index }}>
-          {char}
-        </span>
-      ));
-    }
+    // if (inputValue === "") {
+    //   return labelText.split("").map((char, index) => (
+    //     <span key={index} className="label-char" style={{ "--index": index }}>
+    //       {char}
+    //     </span>
+    //   ));
+    // }
     // Return null or an empty fragment if inputValue is not empty
     return null;
   };

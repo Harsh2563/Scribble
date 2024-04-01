@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
-
-// import component
 import TemporaryDrawer from "../SideDrawer/Sidedrawer";
 import Divider from "@mui/material/Divider";
-
-// import css
 import "./Home.css";
-
 import NotesCard from "../Home/NotesCard";
 import {
-  saveNote,
-  getNotes,
-  getCurrentUser,
-  saveUser,
+ saveNote,
+ getNotes,
+ getCurrentUser,
+ saveUser,
 } from "../../appwrite/api";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -21,14 +16,14 @@ import { avatars } from "../../appwrite/config";
 import Loader from "../Loader/Loader";
 
 function Home() {
-  const [notes, setNotes] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(""); // State for search query
-  const navigate = useNavigate();
-  const [user, setUser] = useState({});
-  const { mutateAsync: createNote } = userSaveNoteMutation();
-  const [loading, setLoading] = useState(true);
+ const [notes, setNotes] = useState([]);
+ const [searchQuery, setSearchQuery] = useState(""); // State for search query
+ const navigate = useNavigate();
+ const [user, setUser] = useState({});
+ const { mutateAsync: createNote } = userSaveNoteMutation();
+ const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     const getUserNotes = async () => {
       try {
         const data = await getCurrentUser();
@@ -58,9 +53,9 @@ function Home() {
       }
     };
     getUserNotes();
-  }, []);
+ }, []);
 
-  const handleNewNote = async () => {
+ const handleNewNote = async () => {
     try {
       const note = await createNote({
         user: user?.$id,
@@ -69,21 +64,21 @@ function Home() {
     } catch (error) {
       console.log(error);
     }
-  };
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-    console.log(setSearchQuery);
-  };
+ };
 
-  if (loading) {
+ const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+ };
+
+ if (loading) {
     return (
       <div className="loader">
         <Loader />
       </div>
     );
-  }
+ }
 
-  return (
+ return (
     <div>
       <div className="navbar-home">
         <div className="left-navbar-home">
@@ -109,7 +104,6 @@ function Home() {
         </div>
       </div>
 
-
       <div className="add-new-note">
         <button class="button" type="button" onClick={handleNewNote}>
           <span class="button__text">Add New Note</span>
@@ -117,52 +111,47 @@ function Home() {
         </button>
       </div>
 
-      <div className="home-folder-notes">
-
-        {/* <div className="home-folder">
-          <Divider />
-          <div className="card-wrapper">
-            {notes
-              .filter((note) =>
-                note.title.toLowerCase().includes(searchQuery.toLowerCase())
-              )
-              .map((note) => (
-                <div key={note.$id}>
-                  <NotesCard title={note.title} id={note.$id} />
-                </div>
-              ))}
+      {/* Search Results Section */}
+        {searchQuery.length > 0 && (
+          <div className="home-notes">
+            <div className="folder-title">
+              <h1>Search Results: </h1>
+            </div>
+            <Divider />
+            <div className="card-wrapper">
+              {notes
+                .filter((note) =>
+                 note.title.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+                .map((note) => (
+                 <div key={note.$id}>
+                    <NotesCard title={note.title} id={note.$id} />
+                 </div>
+                ))}
+            </div>
           </div>
-        </div> */}
+        )}
 
-
+      <div className="home-folder-notes">
         <div className="home-notes">
           <div className="folder-title">
-            <h1>Recent Notes: </h1>
+            <h1>Previous Notes: </h1>
           </div>
           <Divider />
-
-          {/* <div className="notes-card" onClick={handleNewNote}>
-            <div className="notes-card-title">
-              <h1>Add New</h1>
-              <div className="home-folder"?
-              </div>
-              <div className="home-notes">
-                <Divider />
-              </div>
-            </div>
-          </div> */}
 
           <div className="card-wrapper">
             {notes.map((note) => (
-              <div key={note.$id} >
+              <div key={note.$id}>
                 <NotesCard title={note.title} id={note.$id} />
               </div>
             ))}
           </div>
         </div>
+
+        
       </div>
     </div>
-  );
+ );
 }
 
 export default Home;
