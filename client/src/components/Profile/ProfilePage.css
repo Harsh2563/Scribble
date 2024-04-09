@@ -120,3 +120,13 @@
     font-weight: 600;
 
 }
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: #fff;
+    margin: -50px auto 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

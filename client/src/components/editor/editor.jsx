@@ -390,9 +390,6 @@ const EditorComponent = ({ content, id }) => {
       const jsoner = await editor.getJSON();
       const text = await editor.getText();
       const updated = await updateNote(id, jsoner);
-      console.log("====================================");
-      console.log(updated);
-      console.log("====================================");
     }, 500); // 500ms delay
     setDebounceTimer(timerId);
   }, []);
